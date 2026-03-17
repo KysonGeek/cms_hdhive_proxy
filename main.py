@@ -26,9 +26,8 @@ LOCAL_SAVE_URL = "http://localhost:9527/api/cloud/add_share_down"
 # HDHive 请求头（按需补充 Cookie / Authorization）
 HDHIVE_HEADERS = {
     "Content-Type": "application/json",
-}
-if HDHIVE_TOKEN:
-    HDHIVE_HEADERS["X-API-Key"] = HDHIVE_TOKEN
+} 
+if HDHIVE_TOKEN: HDHIVE_HEADERS["X-API-Key"] = HDHIVE_TOKEN
 
 # ============================================================
 # 初始化
@@ -201,7 +200,14 @@ async def movie_115_list(tmdbid: int, page: int = 1):
             },
         }
     )
+@app.get("/api/nullbr/tv/{tmdbid}/resources")
+async def tv_resources(tmdbid: int):
+    return await movie_resources(tmdbid)
 
+
+@app.get("/api/nullbr/tv/{tmdbid}/115")
+async def tv_115_list(tmdbid: int, page: int = 1):
+    return await movie_115_list(tmdbid, page)
 
 # ============================================================
 # 接口3: 转存
